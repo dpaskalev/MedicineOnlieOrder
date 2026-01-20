@@ -11,5 +11,10 @@
 
         public const byte MedicineTypeNameMinLenght = 0;
         public const byte MedicineTypeNameMaxLenght = 250;
+
+        public const byte PharmacyNameMinlenght = 0;
+        public const int PharmacyNameMaxLebnght = 1000;
+        public const byte PharmacyLocationMinLenght = 0;
+        public const int PharmacyLocationMaxLenght = 1000;
     }
 }
