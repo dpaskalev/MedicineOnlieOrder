@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MedicineOnlieOrder.Common;
+using DataModels.Common;
 using Microsoft.AspNetCore.Identity;
 
-namespace MedicineOnlieOrder.Data.DataModels
+namespace DataModels.Data.DataModels
 {
     public class Medicine
     {

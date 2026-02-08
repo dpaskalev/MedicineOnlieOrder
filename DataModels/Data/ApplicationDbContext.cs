@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicineOnlieOrder.Data
+namespace DataModels.Data.DataModels
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -9,5 +9,7 @@ namespace MedicineOnlieOrder.Data
             : base(options)
         {
         }
+
+
     }
 }

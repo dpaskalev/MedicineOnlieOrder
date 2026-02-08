@@ -1,9 +1,9 @@
-﻿using MedicineOnlieOrder.Common;
+﻿using DataModels.Common;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MedicineOnlieOrder.Data.DataModels
+namespace DataModels.Data.DataModels
 {
     public class Pharmacy
     {

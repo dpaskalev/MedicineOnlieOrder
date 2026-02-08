@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineOnlieOrder", "MedicineOnlieOrder\MedicineOnlieOrder.csproj", "{84267382-146A-4B38-934C-5E728D91710C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineOnlieOrder", "MedicineOnlieOrder\MedicineOnlieOrder.csproj", "{84267382-146A-4B38-934C-5E728D91710C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModels", "DataModels\DataModels.csproj", "{3B044BCB-C86F-4FA4-9FF4-1C0FEE5A8BD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{84267382-146A-4B38-934C-5E728D91710C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84267382-146A-4B38-934C-5E728D91710C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84267382-146A-4B38-934C-5E728D91710C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B044BCB-C86F-4FA4-9FF4-1C0FEE5A8BD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B044BCB-C86F-4FA4-9FF4-1C0FEE5A8BD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B044BCB-C86F-4FA4-9FF4-1C0FEE5A8BD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B044BCB-C86F-4FA4-9FF4-1C0FEE5A8BD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

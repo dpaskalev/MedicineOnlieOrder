@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MedicineOnlieOrder.Data.DataModels
+namespace DataModels.Data.DataModels
 {
     [PrimaryKey(nameof(PharmacyId), nameof(MedicineId))]
     public class PharmacyMedicine
