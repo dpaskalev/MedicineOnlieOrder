@@ -10,6 +10,14 @@ namespace DataModels.Data.DataModels
         {
         }
 
+        public DbSet<Medicine> Medicines { get; set; }
 
+        public DbSet<MedicineType> MedicineTypes { get; set; }
+
+        public DbSet<Pharmacy> Pharmacies { get; set; }
+
+        public DbSet<PharmacyMedicine> PharmaciesMedicines { get; set; }
+
+        public DbSet<UserMedicine> UsersMedicines { get; set; }
     }
 }
