@@ -8,7 +8,7 @@ namespace DataModels.Data.DataModels
     public class Medicine
     {
         [Key]
-        int Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(ValidationConstants.MedicineNameMaxLenght)]
@@ -41,6 +41,8 @@ namespace DataModels.Data.DataModels
 
         public bool IsDeleted { get; set; } = false;
 
-        //collection
+        public ICollection<PharmacyMedicine> PharmaciesMedicines { get; set; } = new List<PharmacyMedicine>();
+
+        public ICollection<UserMedicine> UsersMedicines { get; set; } = new List<UserMedicine>();
     }
 }

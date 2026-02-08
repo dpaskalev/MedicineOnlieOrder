@@ -26,6 +26,6 @@ namespace DataModels.Data.DataModels
 
         public bool IsDeleted { get; set; } = false;
 
-        //collection
+        public ICollection<PharmacyMedicine> PharmaciesMedicines { get; set; } = new List<PharmacyMedicine>();
     }
 }
