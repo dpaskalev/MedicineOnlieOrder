@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using DataModels.Data.DataModels;
 
-namespace DataModels.Data.DataModels
+namespace DataModels.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
