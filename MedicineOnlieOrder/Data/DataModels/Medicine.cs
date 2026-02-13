@@ -8,7 +8,7 @@ namespace MedicineOnlieOrder.Data.DataModels
     public class Medicine
     {
         [Key]
-        int Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(ValidationConstants.MedicineNameMaxLenght)]
