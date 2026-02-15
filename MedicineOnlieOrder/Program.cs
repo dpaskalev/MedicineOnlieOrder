@@ -1,4 +1,4 @@
-using MedicineOnlieOrder.Data;
+using DataModels.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

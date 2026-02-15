@@ -1,7 +1,7 @@
-﻿using MedicineOnlieOrder.Common;
+﻿using DataModels.Common;
 using System.ComponentModel.DataAnnotations;
 
-namespace MedicineOnlieOrder.Data.DataModels
+namespace DataModels.Data.DataModels
 {
     public class MedicineType
     {

@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MedicineOnlieOrder.Common;
+using DataModels.Common;
 using Microsoft.AspNetCore.Identity;
 
-namespace MedicineOnlieOrder.Data.DataModels
+namespace DataModels.Data.DataModels
 {
     public class Medicine
     {
         [Key]
-        int Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(ValidationConstants.MedicineNameMaxLenght)]
@@ -41,6 +41,8 @@ namespace MedicineOnlieOrder.Data.DataModels
 
         public bool IsDeleted { get; set; } = false;
 
-        //collection
+        public ICollection<PharmacyMedicine> PharmaciesMedicines { get; set; } = new List<PharmacyMedicine>();
+
+        public ICollection<UserMedicine> UsersMedicines { get; set; } = new List<UserMedicine>();
     }
 }
