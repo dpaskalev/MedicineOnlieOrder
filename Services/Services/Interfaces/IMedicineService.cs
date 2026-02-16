@@ -13,5 +13,7 @@ namespace Services.Services.Interfaces
         public Task<IEnumerable<MedicineIndexViewModel>> GetIndex(string userId);
 
         public Task<MedicineViewModel> GetAddModelAsynk();
+
+        public Task AddMedicineAsync(MedicineViewModel viewModel, string userId);
     }
 }

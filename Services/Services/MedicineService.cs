@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Services.VewModels;
+using DataModels.Data.DataModels;
 
 namespace Services.Services
 {
@@ -56,6 +57,23 @@ namespace Services.Services
             };
 
             return model;
+        }
+
+        public async Task AddMedicineAsync(MedicineViewModel viewModel, string userId)
+        {
+            var medicine = new Medicine
+            {
+                MedicineName = viewModel.Name,
+                ExperationDate = viewModel.ExperationDate,
+                Price = viewModel.Price,
+                Description = viewModel.Description,
+                MedicineTypeId = viewModel.Type,
+                ImageURL = viewModel.ImageURL,
+                UserId = userId
+            };
+
+            await _context.Medicines.AddAsync(medicine);
+            await _context.SaveChangesAsync();
         }
     }
 }
