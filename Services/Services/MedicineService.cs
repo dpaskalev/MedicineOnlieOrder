@@ -75,5 +75,44 @@ namespace Services.Services
             await _context.Medicines.AddAsync(medicine);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<MedicineDetailsViewModel> GetDetails(int id)
+        {
+            var medicine = await _context.Medicines.FindAsync(id);
+
+            if (medicine == null || medicine.IsDeleted == true)
+            {
+                return null;
+            }
+
+            return new MedicineDetailsViewModel
+            {
+                Name = medicine.MedicineName,
+                ExperationDate = medicine.ExperationDate,
+                Price = medicine.Price,
+                Description = medicine.Description,
+                ImageURL = medicine.ImageURL,
+                TypeName = GetMedicineTypeName(medicine.MedicineTypeId)
+            };
+
+            string GetMedicineTypeName(int id)
+            {
+                switch (id)
+                {
+                    case 1:
+                        return "Pill";
+                    case 2:
+                        return "Syringe";
+                    case 3:
+                        return "Syrup";
+                    case 4:
+                        return "Powder";
+                    case 5:
+                        return "Liquid";
+                    default:
+                        return "Error";
+                }
+            }
+        }
     }
 }
