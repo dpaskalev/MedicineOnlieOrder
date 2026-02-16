@@ -1,4 +1,5 @@
-﻿using DataModels.Data;
+﻿using DataModels.Common;
+using DataModels.Data;
 using DataModels.Data.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Services.Services.Interfaces;
@@ -87,6 +88,23 @@ namespace Services.Services
             };
 
             return pharmacyDetailsViewModel;
+        }
+
+        public async Task RemoveFromDetailsAsync(int medicineId, int pharmacyId, string userId)
+        {
+            var model = await _context.Pharmacies
+                .Include(p => p.PharmaciesMedicines)
+                .Where(p => p.IsDeleted == false)
+                .FirstOrDefaultAsync(p => p.Id == pharmacyId);
+
+            if (model != null && model.UserId == userId || model != null && userId == ValidationConstants.AdminId)
+            {
+                var medicineToRemove = model.PharmaciesMedicines
+                    .FirstOrDefault(m => m.MedicineId == medicineId);
+
+                _context.Remove(medicineToRemove);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

@@ -67,5 +67,13 @@ namespace MedicineOnlieOrder.Controllers
 
             return View(pharmacy);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromDetails(PharmacyMedicineViewModel model)
+        {
+            await _pharmacyService.RemoveFromDetailsAsync(model.Id, model.PharmacyId, GetUserId());
+
+            return RedirectToAction("Index");
+        }
     }
 }
