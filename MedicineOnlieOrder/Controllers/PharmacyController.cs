@@ -26,5 +26,19 @@ namespace MedicineOnlieOrder.Controllers
 
             return View(modelsCollection);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            var pharmacy = await _pharmacyService.GetDetailsAsync(id, GetUserId());
+
+            if (pharmacy == null)
+            {
+                return View("CustomErrorView");
+            }
+
+            return View(pharmacy);
+        }
     }
 }
