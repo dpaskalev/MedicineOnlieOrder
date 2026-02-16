@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Services.VewModels;
 
 namespace Services.Services
 {
@@ -38,6 +39,23 @@ namespace Services.Services
                 .ToListAsync();
 
             return Medicines;
+        }
+
+        public async Task<MedicineViewModel> GetAddModelAsynk()
+        {
+            var medicineTypes = await _context.MedicineTypes
+                .Select(t => new TypeVewModel
+                {
+                    Id = t.Id,
+                    Name = t.MedicineTypeName
+                }).ToListAsync();
+
+            var model = new MedicineViewModel
+            {
+                MedicineTypes = medicineTypes
+            };
+
+            return model;
         }
     }
 }
