@@ -106,5 +106,38 @@ namespace Services.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<PharmacyDeleteViewModel> GetPharmacyDeleteViewModel(int id, string userId)
+        {
+            var model = await _context.Pharmacies
+                .Where(m => m.Id == id)
+                .Where(m => m.IsDeleted == false)
+                .Select(m => new PharmacyDeleteViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    PublisherId = m.UserId,
+                    PublisherName = m.User.UserName
+                }).FirstOrDefaultAsync();
+
+            if (model.PublisherId != userId && userId != ValidationConstants.AdminId)
+            {
+                return null;
+            }
+
+            return model;
+        }
+
+        public async Task Delete(int id, string userId)
+        {
+            var medicine = await _context.Pharmacies
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (medicine != null && medicine.UserId == userId || medicine != null && userId == ValidationConstants.AdminId)
+            {
+                medicine.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
