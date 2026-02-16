@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MedicineOnlieOrder.VewModels.MedicineIndexViewModel>
+
+<h2>All Medicine</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>MedicineName</tr>
+        <tr>MedicineType</tr>
+        <tr>ExperationDate</tr>
+        <tr>Price</tr>
+        <tr>Description</tr>
+    </thead>
+    <tbody>
+        @foreach (var medicine in Model)
+        {
+            <tr>
+                <td>@medicine.Name</td>
+                <td>@medicine.TypeName</td>
+                <td>@medicine.ExpeationDate.ToString("yyyy-MM-dd")</td>
+                <td>@medicine.Price $</td>
+                <td>
+                    @if (User?.Identity?.Name == "admin@gmail.com" && medicine.IsPublisher || User?.Identity?.IsAuthenticated == true && medicine.IsPublisher)
+                    {
+                        <a asp-action="Details" asp-route-id="@medicine.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Assign" asp-route-medcineId="@medicine.Id" class="btn btn-primary">Assign</a>
+                        <a asp-action="Delete" asp-route-id="@medicine.Id" class="btn btn-info">Delete</a>
+                    }
+                    else if (User?.Identity?.Name == "admin@gmail.com" && !medicine.IsPublisher)
+                    {
+                        <form asp-controller="Cart" asp-action="Add" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@medicine.Id" />
+                            <button type="submit" class="btn btn-success w-100">Buy</button>
+                        </form>
+                        <a asp-action="Details" asp-route-id="@medicine.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Assign" asp-route-medcineId="@medicine.Id" class="btn btn-primary">Assign</a>
+                        <a asp-action="Delete" asp-route-id="@medicine.Id" class="btn btn-info">Delete</a>
+                    }
+                    else if (User?.Identity?.IsAuthenticated == true && !medicine.IsPublisher && !medicine.HasBought)
+                    {
+                        <form asp-controller="Cart" asp-action="Add" method="post">
+                            <input type="hidden" name="id" value="@medicine.Id" />
+                            <button type="submit" class="btn btn-success w-100">Buy</button>
+                        </form>
+                        <a asp-action="Details" asp-route-id="@medicine.Id" class="btn btn-info">Details</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@medicine.Id" class="btn btn-info">Details</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Create" class="btn btn-primary">Add new medicine</a>
+<a asp-action="Search" class="btn btn-primary">Search</a>
