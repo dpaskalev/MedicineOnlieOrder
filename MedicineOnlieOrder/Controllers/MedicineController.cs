@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Services.Interfaces;
+using Services.VewModels;
 using System.Security.Claims;
 
 namespace MedicineOnlieOrder.Controllers
@@ -33,9 +34,30 @@ namespace MedicineOnlieOrder.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var model = await _medicineService.GetAddModelAsynk();
 
-        //Create option
+            if (model == null)
+            {
+                return View("CustomErrorView");
+            }
 
-        //Search option
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(MedicineViewModel viewModel)
+        {
+            if (ModelState.IsValid == false)
+            {
+                var model = await _medicineService.GetAddModelAsynk();
+                return View(model);
+            }
+
+            await _medicineService.AddMedicineAsync(viewModel, GetUserId());
+
+            return RedirectToAction("Index");
+        }
     }
 }
