@@ -16,5 +16,7 @@ namespace Services.Services.Interfaces
         public Task AddPharamcyToDatabaseAsync(PharmacyViewModel model, string userId);
 
         public Task<PharmacyDetailsViewModel> GetDetailsAsync(int id, string UserId);
+
+        public Task RemoveFromDetailsAsync(int medicineId, int pharmacyId, string userId);
     }
 }
