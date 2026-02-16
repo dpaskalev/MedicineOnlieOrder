@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Services.VewModels;
 using DataModels.Data.DataModels;
+using DataModels.Common;
 
 namespace Services.Services
 {
@@ -94,24 +95,75 @@ namespace Services.Services
                 ImageURL = medicine.ImageURL,
                 TypeName = GetMedicineTypeName(medicine.MedicineTypeId)
             };
+        }
 
-            string GetMedicineTypeName(int id)
+        public async Task<AddMedicineToPharmacyViewModel> GetAddMedcineToPharmacyViewModelAsync(int id, string userId)
+        {
+            var medicine = await _context.Medicines.FindAsync(id);
+
+            if (medicine == null || medicine.IsDeleted == true || userId != medicine.UserId && userId != ValidationConstants.AdminId)
             {
-                switch (id)
+                return null;
+            }
+
+            var pharmacies = await _context.Pharmacies.Where(p => p.IsDeleted == false).ToListAsync();
+
+            AddMedicineToPharmacyViewModel viewModel = new AddMedicineToPharmacyViewModel
+            {
+                MedicineId = medicine.Id,
+                Name = medicine.MedicineName,
+                Pharmacies = pharmacies.Select(p => new PharmacyCheckBox
                 {
-                    case 1:
-                        return "Pill";
-                    case 2:
-                        return "Syringe";
-                    case 3:
-                        return "Syrup";
-                    case 4:
-                        return "Powder";
-                    case 5:
-                        return "Liquid";
-                    default:
-                        return "Error";
+                    Id = p.Id,
+                    Name = p.Name,
+                    IsSelected = false
+                }).ToList()
+            };
+
+            return viewModel;
+        }
+
+        public async Task AssignMedicineAsync(AddMedicineToPharmacyViewModel model)
+        {
+            var AleadyAssignedPharmacies = await _context.PharmaciesMedicines
+                .Where(pm => pm.MedicineId == model.MedicineId)
+                .ToListAsync();
+
+            _context.RemoveRange(AleadyAssignedPharmacies);
+
+            foreach (var pharmacy in model.Pharmacies)
+            {
+                if (pharmacy.IsSelected)
+                {
+                    var pharmacyMedicine = new PharmacyMedicine
+                    {
+                        PharmacyId = pharmacy.Id,
+                        MedicineId = model.MedicineId
+                    };
+
+                    await _context.PharmaciesMedicines.AddAsync(pharmacyMedicine);
                 }
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        string GetMedicineTypeName(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "Pill";
+                case 2:
+                    return "Syringe";
+                case 3:
+                    return "Syrup";
+                case 4:
+                    return "Powder";
+                case 5:
+                    return "Liquid";
+                default:
+                    return "Error";
             }
         }
     }

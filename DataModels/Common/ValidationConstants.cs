@@ -18,5 +18,7 @@
         public const int PharmacyNameMaxLebnght = 1000;
         public const byte PharmacyLocationMinLenght = 0;
         public const int PharmacyLocationMaxLenght = 1000;
+
+        public const string AdminId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd";
     }
 }

@@ -71,5 +71,32 @@ namespace MedicineOnlieOrder.Controllers
 
             return View(medicine);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Assign(int medcineId)
+        {
+            var model = await _medicineService.GetAddMedcineToPharmacyViewModelAsync(medcineId, GetUserId());
+
+            if (model == null)
+            {
+                return View("CustomErrorView");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Assign(AddMedicineToPharmacyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _medicineService.AssignMedicineAsync(model);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
     }
 }
