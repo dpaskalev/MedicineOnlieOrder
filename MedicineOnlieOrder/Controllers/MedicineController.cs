@@ -34,6 +34,7 @@ namespace MedicineOnlieOrder.Controllers
 
             return View(model);
         }
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -46,6 +47,7 @@ namespace MedicineOnlieOrder.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(MedicineViewModel viewModel)
         {
@@ -58,6 +60,20 @@ namespace MedicineOnlieOrder.Controllers
             await _medicineService.AddMedicineAsync(viewModel, GetUserId());
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            var medicine = await _medicineService.GetDetails(id);
+
+            if (medicine == null)
+            {
+                return View("CustomErrorView");
+            }
+
+            return View(medicine);
         }
     }
 }
