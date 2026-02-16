@@ -148,6 +148,39 @@ namespace Services.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<MedicineDeleteViewModel> GetMedicineDeleteViewModel(int id, string userId)
+        {
+            var model = await _context.Medicines
+                .Where(m => m.Id == id)
+                .Where(m => m.IsDeleted == false)
+                .Select(m => new MedicineDeleteViewModel
+                {
+                    Id = m.Id,
+                    Name = m.MedicineName,
+                    PublisherId = m.UserId,
+                    PublisherName = m.User.UserName
+                }).FirstOrDefaultAsync();
+
+            if (model.PublisherId != userId && userId != ValidationConstants.AdminId)
+            {
+                return null;
+            }
+
+            return model;
+        }
+
+        public async Task Delete(int id, string publisherId, string userId)
+        {
+            var medicine = await _context.Medicines
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (medicine != null && publisherId == userId || medicine != null && userId == ValidationConstants.AdminId)
+            {
+                medicine.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
+        }
+
         string GetMedicineTypeName(int id)
         {
             switch (id)

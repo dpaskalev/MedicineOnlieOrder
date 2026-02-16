@@ -21,5 +21,9 @@ namespace Services.Services.Interfaces
         public Task AssignMedicineAsync(AddMedicineToPharmacyViewModel model);
 
         public Task<AddMedicineToPharmacyViewModel> GetAddMedcineToPharmacyViewModelAsync(int id, string userId);
+
+        public Task Delete(int id, string publisherId, string userId);
+
+        public Task<MedicineDeleteViewModel> GetMedicineDeleteViewModel(int id, string userId);
     }
 }
