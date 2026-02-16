@@ -35,5 +35,37 @@ namespace Services.Services
 
             return pharmacyViewModels;
         }
+
+        public async Task<PharmacyDetailsViewModel> GetDetailsAsync(int id, string UserId)
+        {
+            var pharmacy = await _context.Pharmacies
+                .Include(p => p.PharmaciesMedicines)
+                .ThenInclude(pm => pm.Medicine)
+                .Where(m => m.IsDeleted == false)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (pharmacy == null)
+            {
+                return null;
+            }
+
+            var pharmacyDetailsViewModel = new PharmacyDetailsViewModel
+            {
+                Id = pharmacy.Id,
+                Name = pharmacy.Name,
+                Location = pharmacy.Loctaion,
+                Medicines = pharmacy.PharmaciesMedicines
+                .Where(m => m.Medicine.IsDeleted == false)
+                .Select(pm => new PharmacyMedicineViewModel
+                {
+                    Id = pm.Medicine.Id,
+                    PharmacyId = id,
+                    Name = pm.Medicine.MedicineName,
+                    IsPublisher = pharmacy.UserId == UserId
+                }).ToList()
+            };
+
+            return pharmacyDetailsViewModel;
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace Services.Services.Interfaces
     public interface IPharmacyService
     {
         public Task<IEnumerable<PharmacyViewModel>> GetPharmaciesAsynk(string userId);
+
+        public Task<PharmacyDetailsViewModel> GetDetailsAsync(int id, string UserId);
     }
 }
