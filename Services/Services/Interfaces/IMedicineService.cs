@@ -25,5 +25,9 @@ namespace Services.Services.Interfaces
         public Task Delete(int id, string publisherId, string userId);
 
         public Task<MedicineDeleteViewModel> GetMedicineDeleteViewModel(int id, string userId);
+
+        public Task<MedicineSearchViewModel> GetSearchViewModel();
+
+        public Task<IEnumerable<MedicineIndexViewModel>> GetSearchResultAsync(MedicineSearchViewModel model, string userId);
     }
 }
