@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Services.Interfaces;
 using Services.VewModels;
@@ -7,14 +8,9 @@ using System.Security.Claims;
 namespace MedicineOnlieOrder.Controllers
 {
     [Authorize]
-    public class MedicineController : Controller
+    public class MedicineController : BaseController
     {
         private readonly IMedicineService _medicineService;
-
-        private string GetUserId()
-        {
-            return User?.FindFirstValue(ClaimTypes.NameIdentifier);
-        }
 
         public MedicineController(IMedicineService medicineService)
         {
