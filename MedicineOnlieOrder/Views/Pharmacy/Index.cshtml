@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Services.VewModels.PharmacyViewModel>
+
+<h2>Pharmacies</h2>
+
+<a asp-action="Create" lass="btn btn-success mb-4">Add new Pharmacy</a>
+
+<div>
+    @foreach (var pharmacy in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="~/images/Pharmacy_test_image.gif" class="card-img-top" alt="Pharmacy image" style="height: 200px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@pharmacy.Name</h5>
+                    <p class="card-text">@pharmacy.Location</p>
+                    @if (User?.Identity?.Name == "admin@gmail.com" || User?.Identity?.IsAuthenticated == true && pharmacy.IsPublisher)
+                    {
+                        <a asp-action="Details" asp-route-id="@pharmacy.Id" class="btn btn-primary">Details</a>
+                        <a asp-action="Delete" asp-route-id="@pharmacy.Id" class="btn btn-info">Delete</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@pharmacy.Id" class="btn btn-primary">Details</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
