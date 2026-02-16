@@ -18,5 +18,9 @@ namespace Services.Services.Interfaces
         public Task<PharmacyDetailsViewModel> GetDetailsAsync(int id, string UserId);
 
         public Task RemoveFromDetailsAsync(int medicineId, int pharmacyId, string userId);
+
+        public Task<PharmacyDeleteViewModel> GetPharmacyDeleteViewModel(int id, string userId);
+
+        public Task Delete(int id, string userId);
     }
 }
