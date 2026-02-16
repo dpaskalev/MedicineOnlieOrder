@@ -75,5 +75,26 @@ namespace MedicineOnlieOrder.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await _pharmacyService.GetPharmacyDeleteViewModel(id, GetUserId());
+
+            if (model == null)
+            {
+                return View("CustomErrorView");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(MedicineDeleteViewModel model)
+        {
+            await _pharmacyService.Delete(model.Id, GetUserId());
+
+            return RedirectToAction("Index");
+        }
     }
 }
