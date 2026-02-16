@@ -119,5 +119,37 @@ namespace MedicineOnlieOrder.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Search()
+        {
+            var model = await _medicineService.GetSearchViewModel();
+
+            if (model == null)
+            {
+                return View("CustomErrorView");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> SearchResult(MedicineSearchViewModel model)
+        {
+            var result = await _medicineService.GetSearchResultAsync(model, GetUserId());
+
+            if (result == null)
+            {
+                return View("CustomErrorView");
+            }
+            else if (result.Any() == false)
+            {
+                return View("CustomNotFoundView");
+            }
+
+            return View("Index", result);
+        }
     }
 }
