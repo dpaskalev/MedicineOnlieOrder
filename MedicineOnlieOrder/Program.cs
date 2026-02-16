@@ -16,6 +16,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IMedicineService, MedicineService>();
+builder.Services.AddScoped<IPharmacyService, PharmacyService>();
 
 builder.Services.AddControllersWithViews();
 

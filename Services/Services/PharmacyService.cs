@@ -1,4 +1,5 @@
 ﻿using DataModels.Data;
+using DataModels.Data.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Services.Services.Interfaces;
 using Services.VewModels;
@@ -34,6 +35,26 @@ namespace Services.Services
             });
 
             return pharmacyViewModels;
+        }
+
+        public PharmacyViewModel GetPharmacyViewModel()
+        {
+            var model = new PharmacyViewModel();
+
+            return model;
+        }
+
+        public async Task AddPharamcyToDatabaseAsync(PharmacyViewModel model, string userId)
+        {
+            var pharmacy = new Pharmacy
+            {
+                Name = model.Name,
+                Loctaion = model.Location,
+                UserId = userId
+            };
+
+            await _context.Pharmacies.AddAsync(pharmacy);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<PharmacyDetailsViewModel> GetDetailsAsync(int id, string UserId)
