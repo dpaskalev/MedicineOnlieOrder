@@ -1,0 +1,143 @@
+﻿using DataModels.Common;
+using DataModels.Data;
+using DataModels.Data.DataModels;
+using Microsoft.EntityFrameworkCore;
+using Services.Services.Interfaces;
+using Services.VewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Services.Services
+{
+    public class PharmacyService : IPharmacyService
+    {
+        private readonly ApplicationDbContext _context;
+
+        public PharmacyService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<PharmacyViewModel>> GetPharmaciesAsynk(string userId)
+        {
+            var modelsCollection = await _context.Pharmacies
+                .Where(p => p.IsDeleted == false)
+                .ToListAsync();
+
+            var pharmacyViewModels = modelsCollection.Select(p => new PharmacyViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Location = p.Loctaion,
+                IsPublisher = p.UserId == userId
+            });
+
+            return pharmacyViewModels;
+        }
+
+        public PharmacyViewModel GetPharmacyViewModel()
+        {
+            var model = new PharmacyViewModel();
+
+            return model;
+        }
+
+        public async Task AddPharamcyToDatabaseAsync(PharmacyViewModel model, string userId)
+        {
+            var pharmacy = new Pharmacy
+            {
+                Name = model.Name,
+                Loctaion = model.Location,
+                UserId = userId
+            };
+
+            await _context.Pharmacies.AddAsync(pharmacy);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<PharmacyDetailsViewModel> GetDetailsAsync(int id, string UserId)
+        {
+            var pharmacy = await _context.Pharmacies
+                .Include(p => p.PharmaciesMedicines)
+                .ThenInclude(pm => pm.Medicine)
+                .Where(m => m.IsDeleted == false)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (pharmacy == null)
+            {
+                return null;
+            }
+
+            var pharmacyDetailsViewModel = new PharmacyDetailsViewModel
+            {
+                Id = pharmacy.Id,
+                Name = pharmacy.Name,
+                Location = pharmacy.Loctaion,
+                Medicines = pharmacy.PharmaciesMedicines
+                .Where(m => m.Medicine.IsDeleted == false)
+                .Select(pm => new PharmacyMedicineViewModel
+                {
+                    Id = pm.Medicine.Id,
+                    PharmacyId = id,
+                    Name = pm.Medicine.MedicineName,
+                    IsPublisher = pharmacy.UserId == UserId
+                }).ToList()
+            };
+
+            return pharmacyDetailsViewModel;
+        }
+
+        public async Task RemoveFromDetailsAsync(int medicineId, int pharmacyId, string userId)
+        {
+            var model = await _context.Pharmacies
+                .Include(p => p.PharmaciesMedicines)
+                .Where(p => p.IsDeleted == false)
+                .FirstOrDefaultAsync(p => p.Id == pharmacyId);
+
+            if (model != null && model.UserId == userId || model != null && userId == ValidationConstants.AdminId)
+            {
+                var medicineToRemove = model.PharmaciesMedicines
+                    .FirstOrDefault(m => m.MedicineId == medicineId);
+
+                _context.Remove(medicineToRemove);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<PharmacyDeleteViewModel> GetPharmacyDeleteViewModel(int id, string userId)
+        {
+            var model = await _context.Pharmacies
+                .Where(m => m.Id == id)
+                .Where(m => m.IsDeleted == false)
+                .Select(m => new PharmacyDeleteViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    PublisherId = m.UserId,
+                    PublisherName = m.User.UserName
+                }).FirstOrDefaultAsync();
+
+            if (model.PublisherId != userId && userId != ValidationConstants.AdminId)
+            {
+                return null;
+            }
+
+            return model;
+        }
+
+        public async Task Delete(int id, string userId)
+        {
+            var medicine = await _context.Pharmacies
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (medicine != null && medicine.UserId == userId || medicine != null && userId == ValidationConstants.AdminId)
+            {
+                medicine.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
+        }
+    }
+}
