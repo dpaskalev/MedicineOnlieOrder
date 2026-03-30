@@ -24,6 +24,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 builder.Services.AddScoped<IMedicineService, MedicineService>();
 builder.Services.AddScoped<IPharmacyService, PharmacyService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddControllersWithViews();
 
