@@ -1,0 +1,20 @@
+﻿@model Services.VewModels.PharmacyViewModel
+
+<div class="col-md-4">
+    <div class="card mb-4 shadow-sm">
+        <img src="~/images/Pharmacy_test_image.gif" class="card-img-top" alt="Pharmacy image" style="height: 200px; object-fit: cover;" />
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.Location</p>
+            @if (User?.Identity?.Name == "admin@gmail.com" || User?.Identity?.IsAuthenticated == true && Model.IsPublisher)
+            {
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-info">Delete</a>
+            }
+            else
+            {
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+            }
+        </div>
+    </div>
+</div>
