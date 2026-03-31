@@ -1,0 +1,30 @@
+﻿@model MedicineOnlieOrder.VewModels.MedicineIndexViewModel
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.TypeName</td>
+    <td>@Model.ExpeationDate.ToString("yyyy-MM-dd")</td>
+    <td>@Model.Price $</td>
+    <td>
+        @if (User?.Identity?.Name == "admin@gmail.com" && Model.IsPublisher || User?.Identity?.IsAuthenticated == true && Model.IsPublisher)
+        {
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">Details</a>
+            <a asp-action="Assign" asp-route-medcineId="@Model.Id" class="btn btn-primary">Assign</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-info">Delete</a>
+        }
+        else if (User?.Identity?.Name == "admin@gmail.com" && !Model.IsPublisher)
+        {
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">Details</a>
+            <a asp-action="Assign" asp-route-medcineId="@Model.Id" class="btn btn-primary">Assign</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-info">Delete</a>
+        }
+        else if (User?.Identity?.IsAuthenticated == true && !Model.IsPublisher && !Model.HasBought)
+        {
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">Details</a>
+        }
+        else
+        {
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">Details</a>
+        }
+    </td>
+</tr>
