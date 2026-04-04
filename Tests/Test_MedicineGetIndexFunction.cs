@@ -1,7 +1,7 @@
 using NUnit.Framework;
-using Microsoft.EntityFrameworkCore;
 using DataModels;
 using Services;
+using Microsoft.EntityFrameworkCore;
 using DataModels.Data.DataModels;
 using DataModels.Data;
 using Services.Services.Interfaces;
