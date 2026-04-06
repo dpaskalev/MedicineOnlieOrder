@@ -22,7 +22,7 @@ namespace Tests
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDB_Cart")
+                .UseInMemoryDatabase(databaseName: "TestDB_Cart_3")
                 .Options;
             this.context = new ApplicationDbContext(options);
 

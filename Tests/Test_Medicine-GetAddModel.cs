@@ -22,7 +22,7 @@ namespace Tests
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDB_Medicine_GetAddModel")
+                .UseInMemoryDatabase(databaseName: "TestDB_Medicine_GetAddModel_2")
                 .Options;
             this.context = new ApplicationDbContext(options);
 
