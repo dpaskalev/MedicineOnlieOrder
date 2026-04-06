@@ -81,6 +81,8 @@ namespace Tests
             var result = service.GetPharmacyDeleteViewModel(id, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd").Result;
 
             Assert.NotNull(result);
+
+            Cleanup();
         }
 
         [TearDown]

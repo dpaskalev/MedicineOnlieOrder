@@ -82,6 +82,8 @@ namespace Tests
 
             var pharmacy = await context.Pharmacies.FirstOrDefaultAsync(p => p.Id == id);
             Assert.True(pharmacy.IsDeleted == true);
+
+            Cleanup();
         }
 
         [TearDown]

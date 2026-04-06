@@ -67,6 +67,8 @@ namespace Tests
 
             Assert.True(result != null);
             Assert.True(result.Result.Count() == 3);
+
+            Cleanup();
         }
 
         [TearDown]

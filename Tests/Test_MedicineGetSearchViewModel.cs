@@ -33,6 +33,8 @@ namespace Tests
             IMedicineService MedicineService = new MedicineService(this.context);
 
             Assert.IsNotNull(MedicineService.GetSearchViewModel().Result);
+
+            Cleanup();
         }
 
         [TearDown]

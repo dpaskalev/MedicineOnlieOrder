@@ -86,6 +86,8 @@ namespace Tests
             var result = MedicineService.GetIndex("df1c3a0f-1234-4cde-bb55-d5f15a6aabcd");
 
             Assert.True(result.Result.Count() == 2);
+
+            Cleanup();
         }
 
         [TearDown]

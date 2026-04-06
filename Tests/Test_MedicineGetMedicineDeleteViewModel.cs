@@ -101,6 +101,8 @@ namespace Tests
 
             Assert.True(result != null);
             Assert.True(result.Name == "TestMed_2");
+
+            Cleanup();
         }
 
         [TearDown]

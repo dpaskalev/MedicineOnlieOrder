@@ -130,6 +130,8 @@ namespace Tests
             var result = service.GetDetailsAsync(id, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd").Result;
 
             Assert.True(result.Name == "TestPharmacy_3");
+
+            Cleanup();
         }
 
         [TearDown]

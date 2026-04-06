@@ -69,6 +69,8 @@ namespace Tests
             var pharmacies = context.Pharmacies.ToList();
 
             Assert.True(pharmacies.Count() == 2);
+
+            Cleanup();
         }
 
         [TearDown]

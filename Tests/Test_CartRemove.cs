@@ -118,6 +118,8 @@ namespace Tests
             await service.RemoveAsync(3, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd");
 
             Assert.IsNull(context.UsersMedicines.FirstOrDefault(um => um.UserId == "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd" && um.MedicineId == 3));
+
+            Cleanup();
         }
 
         [TearDown]

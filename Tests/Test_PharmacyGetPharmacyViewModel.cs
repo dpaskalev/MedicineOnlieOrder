@@ -37,6 +37,8 @@ namespace Tests
             var result = service.GetPharmacyViewModel();
 
             Assert.True(result != null);
+
+            Cleanup();
         }
 
         [TearDown]

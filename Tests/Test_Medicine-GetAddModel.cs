@@ -45,6 +45,8 @@ namespace Tests
             var result = MedicineService.GetAddModelAsynk();
 
             Assert.True(result != null);
+
+            Cleanup();
         }
 
         [TearDown]

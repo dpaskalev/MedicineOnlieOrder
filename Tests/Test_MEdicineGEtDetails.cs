@@ -85,6 +85,8 @@ namespace Tests
             MedicineDetailsViewModel result = MedicineService.GetDetails(Id).Result;
 
             Assert.True(result.Name == "TestMed_2");
+
+            Cleanup();
         }
 
         [TearDown]

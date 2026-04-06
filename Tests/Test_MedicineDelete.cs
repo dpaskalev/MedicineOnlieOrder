@@ -100,6 +100,8 @@ namespace Tests
             var result = context.Medicines.FirstOrDefault(m => m.Id == Id);
 
             Assert.True(result.IsDeleted == true);
+
+            Cleanup();
         }
 
         [TearDown]

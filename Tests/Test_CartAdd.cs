@@ -98,6 +98,8 @@ namespace Tests
             await service.AddAsync(3, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd");
 
             Assert.True(context.UsersMedicines.ToList().Count() == 1);
+
+            Cleanup();
         }
 
         [TearDown]

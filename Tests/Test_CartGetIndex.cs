@@ -120,6 +120,8 @@ namespace Tests
 
             Assert.NotNull(result);
             Assert.True(result.Count() == 3);
+
+            Cleanup();
         }
 
         [TearDown]
