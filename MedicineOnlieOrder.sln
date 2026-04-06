@@ -5,9 +5,11 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineOnlieOrder", "MedicineOnlieOrder\MedicineOnlieOrder.csproj", "{84267382-146A-4B38-934C-5E728D91710C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModels", "DataModels\DataModels.csproj", "{3B044BCB-C86F-4FA4-9FF4-1C0FEE5A8BD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModels", "DataModels\DataModels.csproj", "{3B044BCB-C86F-4FA4-9FF4-1C0FEE5A8BD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{354BF873-49D4-468F-B31A-8D833D32A11C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{354BF873-49D4-468F-B31A-8D833D32A11C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{0D0B57AC-938B-4FDD-BBB7-2605D84302AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{354BF873-49D4-468F-B31A-8D833D32A11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{354BF873-49D4-468F-B31A-8D833D32A11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{354BF873-49D4-468F-B31A-8D833D32A11C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D0B57AC-938B-4FDD-BBB7-2605D84302AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D0B57AC-938B-4FDD-BBB7-2605D84302AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D0B57AC-938B-4FDD-BBB7-2605D84302AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D0B57AC-938B-4FDD-BBB7-2605D84302AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
