@@ -30,6 +30,10 @@ Each pharmaciy can be deleted only by it's own creator & the admin.
 Each pharmacy shows which medicines are assined to it into it's "Details" page, which alos inlcudes a button with which each user, or the admin, can remove the assined medicines from the user's own pharmacy.
 If the user does not own the current pharmacy, they can not remove the featured medicines trought the "Details" page of the pharmacy.
 
+There is "Delete" option for Medicine & Pharmacies, provided only to the owner of the MEicine/Pharmacy & the admin.
+There is a "Comfirm delete" page, uppon attemting to delete an item.
+Pressing "Cansel" on the "Confirm delete" page will redirect the user to the "Details" page of the item.
+
 Each logged in user can buy the medicine they do not own, by clicking on the button labeled "buy", which will add this medicine to the user's cart.
 The user can access their cart trought the navigation bar. Once there they can remove medicines from their cart by pressing the "remove" button.
 
