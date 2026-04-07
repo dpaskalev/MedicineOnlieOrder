@@ -43,6 +43,9 @@ The imputed data from the user to the application is being validated both, at th
 
 There are also written tests for the services of the application, located into the "Tests" layer of the application.
 
+There are partial views for severaw of the pages.
+There are sections providing details about the page itself (usually where the buttons are located).
+
 There are alos creadted custom Errors for "404 not found" & "400 bad request"
 
 The application has several NuGet packages installed:
